@@ -14,8 +14,8 @@ class AdminPdfController extends AdminPdfControllerCore
             if (!Validate::isLoadedObject($order)) {
                 die(Tools::displayError('The order cannot be found within your database.'));
             }
-            $invoice_path = $invoice_folder_path.$id_order.'.pdf';
             $order_name = $order->reference;
+            $invoice_path = $invoice_folder_path.$order_name.'.pdf';
         } elseif (Tools::isSubmit('id_order_invoice')) {
             $id_order_invoice = Tools::getValue('id_order_invoice');
             $order_invoice = new OrderInvoice((int)$id_order_invoice);
@@ -24,8 +24,8 @@ class AdminPdfController extends AdminPdfControllerCore
             }
             $id_order = $order_invoice->id_order;
             $order = new Order((int)$id_order);
-            $invoice_path = $invoice_folder_path.$id_order.'.pdf';
             $order_name = $order->reference;
+            $invoice_path = $invoice_folder_path.$order_name.'.pdf';
         } else {
             die(Tools::displayError('The order ID -- or the invoice order ID -- is missing.'));
         }
